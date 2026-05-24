@@ -71,13 +71,12 @@
     return;
   }
   const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleString('ru-RU', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
+const day = String(currentDate.getDate()).padStart(2, '0'); // День
+const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Месяц (+1, т.к. январь = 0)
+const year = String(currentDate.getFullYear()).slice(-2); // Последние 2 цифры года (22)
+const hours = String(currentDate.getHours()).padStart(2, '0'); // Часы
+const minutes = String(currentDate.getMinutes()).padStart(2, '0'); // Минуты
+const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}`;
 
   const newCommentHTML = `
     <li class="comment">
