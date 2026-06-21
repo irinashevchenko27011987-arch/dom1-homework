@@ -1,6 +1,7 @@
 import { escapeHtml } from "./escape.js";
 
-export function renderComments(commentsList, commentsData) {
+export function renderComments(commentsData) {
+  const commentsList = document.querySelector(".comments");
   if (!commentsList) {
     console.error("Ошибка рендера: элемент .comments не найден в HTML");
     return;
