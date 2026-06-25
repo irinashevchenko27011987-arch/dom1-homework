@@ -1,4 +1,4 @@
-export default [
+export let commentsData = [
   {
     id: 1,
     name: "Глеб Фокин",

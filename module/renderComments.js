@@ -1,6 +1,9 @@
-import { escapeHtml } from "./escape.js";
-
-export function renderComments(commentsData) {
+import {escapeHtml} from "./escape.js";
+import {commentsData}  from "./comments.js";
+import {handleLikes} from "./handleLikes.js";
+import {handleQuotes} from "./handleQuotes.js";
+let isinit = false
+export function renderComments() {
   const commentsList = document.querySelector(".comments");
   if (!commentsList) {
     console.error("Ошибка рендера: элемент .comments не найден в HTML");
@@ -20,12 +23,12 @@ export function renderComments(commentsData) {
       return `
       <li class="comment" data-id="${comment.id}">
         <div class="comment-header">
-          <div>${escapeHtml(comment.name)}</div>
+          <div>${comment.name}</div>
           <div>${comment.date}</div>
         </div>
         <div class="comment-body">
           <div class="comment-text">
-            ${escapeHtml(comment.text)}
+            ${comment.text}
           </div>
         </div>
         <div class="comment-footer">
@@ -37,4 +40,10 @@ export function renderComments(commentsData) {
       </li> `;
     })
     .join("");
+
+  if (!isinit) {
+      handleLikes();
+    handleQuotes();
+    isinit = true
+  }
 }

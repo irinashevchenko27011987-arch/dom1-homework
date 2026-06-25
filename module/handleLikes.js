@@ -1,4 +1,6 @@
-export function handleLikes(commentsData, renderComments) {
+import {commentsData} from "./comments.js"
+import {renderComments} from "./renderComments.js";
+export function handleLikes() {
   const commentsList = document.querySelector(".comments");
   if (!commentsList) return;
 
@@ -12,7 +14,7 @@ export function handleLikes(commentsData, renderComments) {
       if (comment) {
         comment.isLiked = !comment.isLiked;
         comment.likesCount += comment.isLiked ? 1 : -1;
-        renderComments(commentsData);
+        renderComments();
       }
     }
   });

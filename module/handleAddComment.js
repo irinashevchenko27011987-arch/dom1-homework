@@ -1,4 +1,7 @@
-export function handleAddComment(commentsData, renderComments) {
+import {escapeHtml } from "./escape.js";
+import {commentsData} from "./comments.js";
+import {renderComments} from "./renderComments.js";
+export function handleAddComment() {
     const addButton = document.querySelector(".add-form-button");
     const nameInput = document.querySelector(".add-form-name");
     const commentTextarea = document.querySelector(".add-form-text");
@@ -33,7 +36,7 @@ export function handleAddComment(commentsData, renderComments) {
       };
   
       commentsData.push(newComment);
-      renderComments(commentsData);
+      renderComments();
   
       nameInput.value = "";
       commentTextarea.value = "";

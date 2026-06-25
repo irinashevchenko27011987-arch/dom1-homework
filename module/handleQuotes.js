@@ -1,4 +1,5 @@
-export function handleQuotes(commentsData) {
+import {commentsData} from "./comments.js"
+export function handleQuotes() {
   const commentsList = document.querySelector(".comments");
   const commentTextarea = document.querySelector(".add-form-text");
 
