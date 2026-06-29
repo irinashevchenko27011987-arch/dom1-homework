@@ -13,8 +13,8 @@ export function handleQuotes() {
     const currentComment = commentsData.find((c) => c.id == commentIdStr);
 
     if (currentComment) {
-      const fullQuotedText = `>${currentComment.text}
-  > — ${currentComment.name}`;
+      const fullQuotedText = `${currentComment.text}
+   :${currentComment.name}`;
 
       commentTextarea.value = fullQuotedText;
 
