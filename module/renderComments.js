@@ -2,7 +2,7 @@ import {escapeHtml} from "./escape.js";
 import {commentsData}  from "./comments.js";
 import {handleLikes} from "./handleLikes.js";
 import {handleQuotes} from "./handleQuotes.js";
-let isinit = false
+
 export function renderComments() {
   const commentsList = document.querySelector(".comments");
   if (!commentsList) {
@@ -41,9 +41,8 @@ export function renderComments() {
     })
     .join("");
 
-  if (!isinit) {
+  
       handleLikes();
     handleQuotes();
-    isinit = true
-  }
+   
 }
