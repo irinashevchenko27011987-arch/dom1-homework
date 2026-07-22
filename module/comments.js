@@ -1,5 +1,5 @@
 export let commentsData = [
-  {
+    {
     id: 1,
     name: "Глеб Фокин",
     date: "12.02.22 12:18",
