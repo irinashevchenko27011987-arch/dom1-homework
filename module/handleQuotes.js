@@ -10,7 +10,7 @@ export function handleQuotes() {
     if (e.target.classList.contains("like-button") || !clickedComment) return;
 
     const commentIdStr = clickedComment.getAttribute("data-id");
-    const currentComment = commentsData.find((c) => c.id == commentIdStr);
+    const currentComment = commentsData.find((c) => c.id === commentIdStr);
 
     if (currentComment) {
       const fullQuotedText = `${currentComment.text}

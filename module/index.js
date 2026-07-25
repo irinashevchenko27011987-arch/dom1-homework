@@ -1,28 +1,30 @@
 import { commentsData } from "./comments.js";
 import { renderComments } from "./renderComments.js";
 import { handleAddComment } from "./handleAddComment.js";
-import { getComments } from "./api.js";
+import { fetchCommentsList } from "./api.js"; 
 
 function initApp() {
-   getComments((serverComments) => {
-      const normalized = serverComments.map(c => ({
-      id: c.id,
-      name: c.author?.name || "Аноним",
-      date: c.date,
-      text: c.text,
-      likesCount: c.likes,
-      isLiked: c.isLiked
-    }));
+  const commentsList = document.querySelector(".comments");
+      return;
+  }
 
-   
-    commentsData.length = 0;
-    commentsData.push(...normalized);
+  fetchCommentsList()
+    .then((serverComments) => {
+      const normalized = serverComments.map((c) => ({
+        id: c.id,
+        name: c.author?.name || "Аноним",
+        date: c.date,
+        text: c.text,
+        likesCount: c.likes,
+        isLiked: c.isLiked,
+      }));
 
-    console.log(` Загружено комментариев: ${commentsData.length}`);
+      commentsData.length = 0;
+      commentsData.push(...normalized);
 
-    renderComments();
-    handleAddComment();
-  });
-}
+          renderComments();
+      handleAddComment();
+    })
+    
 
 initApp();
