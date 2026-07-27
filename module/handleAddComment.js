@@ -15,9 +15,9 @@ export function handleAddComment() {
     const name = nameInput.value.trim();
     const text = commentTextarea.value.trim();
 
-    if (!name || !text || name.length < 3 || text.length < 3) {
-      alert("Имя и комментарий должны быть не короче 3 символов");
-      return; 
+    if (!name || !text) {
+      alert("Пожалуйста, заполните оба поля");
+      return;
     }
 
     const savedName = name;
@@ -52,11 +52,14 @@ export function handleAddComment() {
 
         if (err.message === "500") {
           message = "Сервер сломался, попробуй позже";
-        } else if (err.message === "400") {
-          message = "Некорректные данные";
-        } else if (err.name === "TypeError" && err.message.includes("fetch")) {
-           message = "Кажется, у вас сломался интернет, попробуйте позже";
-        } else {
+        } 
+        else if (err.message === "400") {
+           message = "Имя и комментарий должны быть не короче 3 символов";
+        } 
+        else if (err.name === "TypeError" && err.message.includes("fetch")) {
+          message = "Кажется, у вас сломался интернет, попробуйте позже";
+        } 
+        else {
           message = "Что-то пошло не так: " + err.message;
         }
 
