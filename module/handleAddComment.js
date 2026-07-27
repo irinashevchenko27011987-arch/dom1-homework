@@ -16,18 +16,19 @@ export function handleAddComment() {
     const text = commentTextarea.value.trim();
 
     if (!name || !text || name.length < 3 || text.length < 3) {
-      alert("Имя и текст должны быть не короче 3 символов.");
-      return;
+      alert("Имя и комментарий должны быть не короче 3 символов");
+      return; 
     }
-    
+
+    const savedName = name;
+    const savedText = text;
+
     addButton.disabled = true;
     addButton.textContent = "Отправка...";
-    
 
     postComment(name, text)
-      .then(() => fetchCommentsList()) 
+      .then(() => fetchCommentsList())
       .then((freshComments) => {
-        
         const normalized = freshComments.map((c) => ({
           id: c.id,
           name: c.author?.name || "Аноним",
@@ -39,18 +40,34 @@ export function handleAddComment() {
 
         commentsData.length = 0;
         commentsData.push(...normalized);
-
-        renderComments(); 
+        renderComments();
 
         nameInput.value = "";
         commentTextarea.value = "";
-
-        addButton.disabled = false;
-    addButton.textContent = "Написать";
       })
       .catch((err) => {
-        console.error("Ошибка отправки:", err);
-        alert("Не удалось добавить комментарий: " + err.message);
+        console.error("Ошибка:", err);
+
+        let message = "";
+
+        if (err.message === "500") {
+          message = "Сервер сломался, попробуй позже";
+        } else if (err.message === "400") {
+          message = "Некорректные данные";
+        } else if (err.name === "TypeError" && err.message.includes("fetch")) {
+           message = "Кажется, у вас сломался интернет, попробуйте позже";
+        } else {
+          message = "Что-то пошло не так: " + err.message;
+        }
+
+        alert(message);
+
+        nameInput.value = savedName;
+        commentTextarea.value = savedText;
       })
-    });
+      .finally(() => {
+        addButton.disabled = false;
+        addButton.textContent = "Написать";
+      });
+  });
 }
