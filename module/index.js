@@ -4,7 +4,7 @@ import { renderLogin } from './renderLogin.js';
 import { handleAddComment } from './handleAddComment.js';
 import { fetchCommentsList } from './api.js'; 
 
-function updateComments(data) {
+export function updateComments(data) {
   const normalized = data.map((c) => ({
     id: c.id,
     name: c.author?.name || 'Аноним',
@@ -30,14 +30,14 @@ function initApp() {
   fetchCommentsList()
     .then((data) => {
       updateComments(data);
-      renderComments();
+      renderComments();        
+      handleAddComment();      
     })
     .catch((err) => {
       console.error('Ошибка загрузки комментариев:', err);
-      renderLogin(container);
+      renderLogin();
     });
-
-  handleAddComment();
+  
 }
 
 initApp();

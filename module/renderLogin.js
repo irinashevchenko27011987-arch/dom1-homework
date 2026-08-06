@@ -2,7 +2,9 @@
 import { login, setToken } from './api.js';
 import { renderRegistration } from './renderRegistration.js';
 import { renderComments } from './renderComments.js'; 
-
+import { fetchCommentsList } from './api.js';
+import  { updateComments} from './index.js'
+import { handleAddComment } from './handleAddComment.js';
 export const renderLogin = (container) => {
   const loginHtml = `
     <div class="login-page">
@@ -55,9 +57,15 @@ export const renderLogin = (container) => {
         setToken(user.token);
         localStorage.setItem('token', user.token);
         localStorage.setItem('userName', user.name);
-        
-        renderComments();
-      })
+       return fetchCommentsList()
+        .then((data) => {
+          updateComments(data);
+          renderComments();
+         
+          handleAddComment();
+          
+        }) 
+             })
       .catch((err) => {
         errorEl.textContent = err.message;
         errorEl.style.display = 'block';

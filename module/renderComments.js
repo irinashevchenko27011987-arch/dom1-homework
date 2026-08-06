@@ -4,6 +4,7 @@ import { handleLikes } from './handleLikes.js';
 import { handleQuotes } from './handleQuotes.js';
 import { renderLogin } from './renderLogin.js';
 
+
 function formatDate(isoString) {
   if (!isoString) return '';
   const d = new Date(isoString);
@@ -20,7 +21,7 @@ function formatDate(isoString) {
 export function renderComments() {
   const container = document.querySelector('.container');
   if (!container) {
-    console.error('❌ Не найден контейнер .container');
+    console.error(' Не найден контейнер .container');
     return;
   }
 
@@ -30,6 +31,7 @@ export function renderComments() {
     container.innerHTML = '<p style="color: #aaa; text-align: center;">Комментариев пока нет</p>';
     handleLikes();
     handleQuotes();
+    
     return;
   }
 
@@ -92,12 +94,12 @@ export function renderComments() {
   if (hasValidToken) {
     handleLikes();
     handleQuotes();
-  } else {
+     } else {
     const link = document.querySelector('.link-login');
     if (link) {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('🔑 Клик по ссылке "Войти"');
+        console.log(' Клик по ссылке "Войти"');
         const container = document.querySelector('.container');
         if (container) {
           renderLogin(container);

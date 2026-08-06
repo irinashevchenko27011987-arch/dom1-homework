@@ -46,7 +46,7 @@ export function postComment(name, text) {
   })
  
   .then((response) => {
-      if (response.status === 200) {
+      if (response.ok) {
            return response.json();
     }   
     if (response.status === 400) {
