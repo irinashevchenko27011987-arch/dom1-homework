@@ -101,3 +101,31 @@ export const registration = (name, login, password) => {
     return response.json();
   });
 };
+export const toggleLike = (commentId) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return Promise.reject(new Error('Нет токена авторизации'));
+  }
+
+  return fetch(`${baseURL}/comments/${commentId}/toggle-like`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+         },
+  })
+  .then((response) => {
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('Требуется авторизация');
+      }
+      if (response.status === 500) {
+        throw new Error('Сервер упал');
+      }
+      throw new Error(`Ошибка API: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+       return data.result;
+  });
+};

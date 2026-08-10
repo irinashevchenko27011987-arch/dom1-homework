@@ -3,6 +3,7 @@ import { renderComments } from './renderComments.js';
 import { renderLogin } from './renderLogin.js';
 import { handleAddComment } from './handleAddComment.js';
 import { fetchCommentsList } from './api.js'; 
+import { handleLikes } from './handleLikes.js';
 
 export function updateComments(data) {
   const normalized = data.map((c) => ({
@@ -30,7 +31,8 @@ function initApp() {
   fetchCommentsList()
     .then((data) => {
       updateComments(data);
-      renderComments();        
+      renderComments(); 
+           
       handleAddComment();      
     })
     .catch((err) => {

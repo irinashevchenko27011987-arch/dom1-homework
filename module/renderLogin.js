@@ -8,8 +8,8 @@ import { handleAddComment } from './handleAddComment.js';
 export const renderLogin = (container) => {
   const loginHtml = `
     <div class="login-page">
+           <form id="login-form">
       <h2>Вход в аккаунт</h2>
-      <form id="login-form">
         <div class="form-field">
           <label for="login-input">Логин</label>
           <input type="text" id="login-input" name="login" placeholder="Введите логин" required>
